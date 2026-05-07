@@ -42,8 +42,6 @@ services:
     image: ghcr.io/plausible/community-edition:v3.2.0
     restart: always
     command: sh -c "/entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
-    ports:
-      - 8080:80
     depends_on:
       plausible_db:
         condition: service_healthy
@@ -66,7 +64,7 @@ services:
       - DISABLE_REGISTRATION
       - ENABLE_EMAIL_VERIFICATION
       # web: https://github.com/plausible/community-edition/wiki/configuration#web
-      - HTTP_PORT
+      - HTTP_PORT=8000
       - HTTPS_PORT
       # databases: https://github.com/plausible/community-edition/wiki/configuration#database
       - DATABASE_URL
